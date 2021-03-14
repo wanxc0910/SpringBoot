@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(String id) {
         return userMapper.deleteUser(id) > 0 ? true : false;
     }
+
+    @Override
+    public boolean updateUser(User user) {
+        return userMapper.updateUser(user) > 0 ? true : false;
+    }
 }
