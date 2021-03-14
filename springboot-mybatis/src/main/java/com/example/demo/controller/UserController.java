@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author ：wanxc
@@ -48,7 +49,6 @@ public class UserController {
 
         boolean rs = userService.addUser(user);
 
-
         if (rs) {
             jsonObject.put("code", "1");
             jsonObject.put("msg", "成功！");
@@ -65,5 +65,23 @@ public class UserController {
     public Object deleteUserById(HttpServletRequest req) {
         String id = req.getParameter("id");
         return userService.deleteUser(id);
+    }
+
+    /**
+     * 修改
+     *
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public Object updateUserById(HttpServletRequest req) {
+        String id = req.getParameter("id");
+        String userName = req.getParameter("userName").trim();
+
+        User user = new User();
+        user.setId(id);
+        user.setUserName(userName);
+
+        return userService.updateUser(user);
     }
 }
