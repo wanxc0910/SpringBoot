@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 配置User对象创建 -->
+    <bean id="user" class="com.example.demo.entity.User"/>
+
+    <!-- 1、set方法注入
+         3、p名称空间注入(了解) xmlns:p="http://www.springframework.org/schema/p"
+    -->
+    <bean id="book" class="com.example.demo.entity.Book" p:author="冯涛">
+        <!-- 使用property完成属性注入
+             name：类属性名称
+             value：向属性注入的值
+        -->
+        <property name="bookName">
+            <value><![CDATA[<修心三不>]]></value> <!-- 属性值包含特殊字符 1、转义 2、使用CDATA -->
+        </property>
+        <!-- <property name="author" value="冯涛"/> -->
+        <property name="address">
+            <null/> <!-- 空值注入 -->
+        </property>
+    </bean>
+
+    <!-- 2、有参构造注入 -->
+    <bean id="orders" class="com.example.demo.entity.Orders">
+        <constructor-arg name="orderName" value="Mobile Phone"/>
+        <constructor-arg name="address" value="China"/>
+    </bean>
+
+    <!-- 注入外部bean -->
+    <bean id="userService" class="com.example.demo.service.impl.UserServiceImpl">
+        <!-- 注入userDao对象 ref：创建userDao对象bean标签id值 -->
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="userDao" class="com.example.demo.dao.impl.UserDaoImpl"/>
+
+    <!-- 注入内部bean 级联赋值 -->
+    <bean id="emp" class="com.example.demo.entity.Emp">
+        <property name="empName" value="张三"/>
+        <property name="sex" value="男"/>
+        <property name="dept">
+            <bean id="dept" class="com.example.demo.entity.Dept">
+                <property name="deptName" value="技术部"/>
+            </bean>
+        </property>
+    </bean>
+</beans>
