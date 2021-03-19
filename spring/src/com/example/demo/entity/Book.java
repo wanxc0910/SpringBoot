@@ -1,15 +1,22 @@
 package com.example.demo.entity;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * @author ：wanxc
  * @date ：Created in 2021/3/15 21:18
  * @description：
  */
+@Component
 public class Book {
+    @Value("Java")
     private String bookName;
 
+    @Value("Test")
     private String author;
 
+    @Value("Idea")
     private String address;
 
     public String getBookName() {
