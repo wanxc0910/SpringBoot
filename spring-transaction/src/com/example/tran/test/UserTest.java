@@ -1,13 +1,15 @@
 package com.example.tran.test;
 
 import com.example.tran.config.SpringConfig;
+import com.example.tran.dao.UserDao;
+import com.example.tran.dao.impl.UserDaoImpl;
 import com.example.tran.entity.User;
 import com.example.tran.service.UserService;
 import com.example.tran.service.impl.UserServiceImpl;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import sun.net.www.content.text.Generic;
 
 /**
  * @author ：wanxc
@@ -15,11 +17,15 @@ import sun.net.www.content.text.Generic;
  * @description：
  */
 public class UserTest {
+    private static final Logger LOG = LoggerFactory.getLogger(UserTest.class);
+
     @Test
     public void test() {
+        LOG.info("test");
+
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         context.getBean("userService", UserService.class);
-        UserService userService = (UserService)context.getBean("userService");
+        UserService userService = (UserService) context.getBean("userService");
 
         Double money = 55.00;
 
